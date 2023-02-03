@@ -9,9 +9,9 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static final String[] BAD_WORDS = {"fuck", "merde", "putain", "ass"};
+    private static final String[] INJURES = {"fuck", "merde", "putain", "ass"};
     private static final String[] EMOJIS = {":)", "😂", "😍", "😭", "😡"};
-    private static final String[] THANK_WORDS = {"amen", "akpe", "Merci", "nagode", "imela", "thanks", "thank you", "alhamdulillah", "shukran"};
+    private static final String[] REMERCIEMENTS = {"amen", "akpe", "Merci", "nagode", "imela", "thanks", "thank you", "alhamdulillah", "shukran"};
 
     public static void main(String[] args) throws IOException {
 
@@ -20,14 +20,14 @@ public class Main {
         String userName = Userscan.nextLine();
 
         // Initialise les compteurs
-        int totalM = 0;
-        int lolC = 0;
-        int lmaoC = 0;
-        int emojiSentC = 0;
-        int badWordsC = 0;
-        int emojiReceivedC = 0;
-        int angryEmojiC = 0;
-        int thankC = 0;
+        int total = 0;
+        int lol = 0;
+        int lmao = 0;
+        int emojiEnvoye = 0;
+        int injures = 0;
+        int emojiRecu = 0;
+        int emojiColere = 0;
+        int remerciement = 0;
 
         // Lit le fichier d'historique de WhatsApp
         BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\A2KA\\Downloads\\dislaurine.txt"));
@@ -35,50 +35,50 @@ public class Main {
         while ((line = reader.readLine()) != null) {
             // Si la ligne contient le nom de l'utilisateur, cela signifie qu'elle contient un message envoyé par cet utilisateur
             if (line.contains(userName)) {
-                totalM++;
+                total++;
                 if (line.contains("lol")) {
-                    lolC++;
+                    lol++;
                 }
                 if (line.contains("lmao")) {
-                    lmaoC++;
+                    lmao++;
                 }
                 for (String emoji : EMOJIS) {
                     if (line.contains(emoji)) {
-                        emojiSentC++;
+                        emojiEnvoye++;
                     }
                 }
-                for (String badWord : BAD_WORDS) {
+                for (String badWord : INJURES) {
                     if (line.contains(badWord)) {
-                        badWordsC++;
+                        injures++;
                     }
                 }
-                for (String thankWord : THANK_WORDS) {
+                for (String thankWord : REMERCIEMENTS) {
                     if (line.contains(thankWord)) {
-                        thankC++;
+                        remerciement++;
                     }
                 }
             } else {
                 // Si la ligne ne contient pas le nom de l'utilisateur, cela signifie qu'elle contient un message reçu par l'utilisateur
                 for (String emoji : EMOJIS) {
                     if (line.contains(emoji)) {
-                        emojiReceivedC++;
+                        emojiRecu++;
                     }
                 }
                 if (line.contains("😡")) {
-                    angryEmojiC++;
+                    emojiColere++;
                 }
             }
         }
         reader.close();
 
         // Affiche les résultats
-        System.out.println("Nombre total de messages envoyes: " + totalM);
-        System.out.println("Nombre total de fois que l'utilisateur a envoye 'lol': " + lolC);
-        System.out.println("Nombre total de fois ou l'utilisateur a envoye 'lmao': " + lmaoC);
-        System.out.println("Nombre total de fois ou l'utilisateur a envoye des emojis: " + emojiSentC);
-        System.out.println("Nombre total de grossieretes envoyees par l'utilisateur: " + badWordsC);
-        System.out.println("Nombre total de fois que l'utilisateur a recu des emojis: " + emojiReceivedC);
-        System.out.println("Nombre total de fois ou l'utilisateur a recu l'emoji 😡 en colere: " + angryEmojiC);
-        System.out.println("Nombre total de fois ou l'utilisateur a envoye et recu les mots de remerciement: " + thankC);
+        System.out.println("Au total "+userName+" a envoye "+ total+" messages" );
+        System.out.println("Au total "+userName+" a envoye lol " + lol+" fois");
+        System.out.println("Au total "+userName+" a envoye lmao " + lmao+" fois");
+        System.out.println("Au total "+userName+" a envoye "+ emojiEnvoye+ " emojis" );
+        System.out.println("Au total "+userName+" a envoye " + injures+ " injures");
+        System.out.println("Au total "+userName+" a recu " + emojiRecu+ " emojis");
+        System.out.println("Au total "+userName+" a recu "+ emojiColere+ " fois l'emoji en colere" );
+        System.out.println("Au total "+userName+" a envoye et recu "+ remerciement+ " mots de remerciements" );
     }
 }
